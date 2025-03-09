@@ -1,0 +1,38 @@
+<div class="directory-browser p-2">
+    <div class="mb-4">
+        <h5 class="mb-3">Current Location</h5>
+        <div class="d-flex align-items-center">
+            <input type="text" class="form-control" value="{{ current_dir }}" readonly style="border-radius: 12px; background-color: rgba(255, 255, 255, 0.8);">
+            <button type="button" class="btn ms-2 select-dir-btn" data-path="{{ current_dir }}" 
+                style="background: linear-gradient(90deg, #0071e3, #00c6fb); color: white; border: none; border-radius: 50px; padding: 0.5rem 1.5rem;">
+                Select
+            </button>
+        </div>
+    </div>
+    
+    <div class="mb-3">
+        {% if parent_dir %}
+        <a href="#" class="dir-item d-flex align-items-center p-3 mb-2" data-path="{{ parent_dir }}"
+           style="text-decoration: none; color: #1d1d1f; background-color: rgba(255, 255, 255, 0.7); border-radius: 12px; transition: all 0.2s ease;">
+            <i class="bi bi-arrow-up-circle me-3" style="font-size: 1.2rem; color: #0071e3;"></i>
+            <span>Parent Directory</span>
+        </a>
+        {% endif %}
+        
+        {% for dir in subdirs %}
+        <a href="#" class="dir-item d-flex align-items-center p-3 mb-2" data-path="{{ dir.path }}"
+           style="text-decoration: none; color: #1d1d1f; background-color: rgba(255, 255, 255, 0.7); border-radius: 12px; transition: all 0.2s ease;">
+            <i class="bi bi-folder me-3" style="font-size: 1.2rem; color: #0071e3;"></i>
+            <span>{{ dir.name }}</span>
+        </a>
+        {% endfor %}
+    </div>
+</div>
+
+<style>
+    .dir-item:hover {
+        background-color: rgba(0, 113, 227, 0.1) !important;
+        transform: translateY(-2px);
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+    }
+</style>
